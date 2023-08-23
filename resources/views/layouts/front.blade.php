@@ -50,19 +50,13 @@
                </ul>
                <ul class="navbar-nav ml-auto">
                  <li class="nav-item active">
-                   <a class="nav-link" href="index.html">Beranda</a>
+                   <a class="nav-link" href="{{ route('index') }}">Beranda</a>
                  </li>
                  <li class="nav-item ">
-                   <a class="nav-link" href="tentang.html">Tentang Kami</a>
+                   <a class="nav-link" href="{{ route('products') }}">Produk</a>
                  </li>
                  <li class="nav-item ">
-                   <a class="nav-link" href="produk-login.html">Produk</a>
-                 </li>
-                 <li class="nav-item ">
-                   <a class="nav-link" href="supplier.html">Supplier</a>
-                 </li>
-                 <li class="nav-item ">
-                   <a class="nav-link" href="kontak.html">Kontak</a>
+                   <a class="nav-link" href="{{ route('login') }}">Login</a>
                  </li>
                </ul>
                <div class="d-md-none d-sm-block mb-3">

@@ -25,8 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         $data['page_title'] = "Home";
-        $product = product::with('category')->latest();
-        $data['product'] = $product->get();
+        $products = product::with('category')->latest();
+        $data['products'] = $products->get();
         return view('pages.home.index', $data);
     }
     

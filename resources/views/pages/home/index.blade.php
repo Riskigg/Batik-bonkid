@@ -16,85 +16,19 @@
            </ol>
          </nav>
        </div>
+       @foreach ($products as $item)
        <div class="col-lg-3 col-md-6">
          <div class="card cardProduk">
-           <img src="assets/img/foto produk.png" class="card-img-top" alt="nama produk">
+           <img src="{{ asset('uploads/'.$item->image) }}" class="card-img-top" alt="{{ $item->name }}">
            <div class="card-body">
-             <a href="user-detail-produk.html" class="mt-0">Frisian Flag Kemasan Saset 100 ml</a>
-             <p class="text-danger priceShow">Rp20,000</p>
+             <a href="user-detail-produk.html" class="mt-0">{{ $item->name }}</a>
+             <p class="text-danger priceShow">{{ $item->price }}</p>
              <a href="keranjang.html" type="button" class="btn btn-outline-danger text-danger br10">Add to cart</a>
            </div>
          </div>
        </div>
-       <div class="col-lg-3 col-md-6">
-         <div class="card cardProduk">
-           <img src="assets/img/foto produk.png" class="card-img-top" alt="nama produk">
-           <div class="card-body">
-             <a href="user-detail-produk.html" class="mt-0">Frisian Flag Kemasan Saset 100 ml</a>
-             <p class="text-danger priceShow">Rp20,000</p>
-             <a href="keranjang.html" type="button" class="btn btn-outline-danger text-danger br10">Add to cart</a>
-           </div>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-6">
-         <div class="card cardProduk">
-           <img src="assets/img/foto produk.png" class="card-img-top" alt="nama produk">
-           <div class="card-body">
-             <a href="user-detail-produk.html" class="mt-0">Frisian Flag Kemasan Saset 100 ml</a>
-             <p class="text-danger priceShow">Rp20,000</p>
-             <a href="keranjang.html" type="button" class="btn btn-outline-danger text-danger br10">Add to cart</a>
-           </div>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-6">
-         <div class="card cardProduk">
-           <img src="assets/img/foto produk.png" class="card-img-top" alt="nama produk">
-           <div class="card-body">
-             <a href="user-detail-produk.html" class="mt-0">Frisian Flag Kemasan Saset 100 ml</a>
-             <p class="text-danger priceShow">Rp20,000</p>
-             <a href="keranjang.html" type="button" class="btn btn-outline-danger text-danger br10">Add to cart</a>
-           </div>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-6">
-         <div class="card cardProduk">
-           <img src="assets/img/foto produk.png" class="card-img-top" alt="nama produk">
-           <div class="card-body">
-             <a href="user-detail-produk.html" class="mt-0">Frisian Flag Kemasan Saset 100 ml</a>
-             <p class="text-danger priceShow">Rp20,000</p>
-             <a href="keranjang.html" type="button" class="btn btn-outline-danger text-danger br10">Add to cart</a>
-           </div>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-6">
-         <div class="card cardProduk">
-           <img src="assets/img/foto produk.png" class="card-img-top" alt="nama produk">
-           <div class="card-body">
-             <a href="user-detail-produk.html" class="mt-0">Frisian Flag Kemasan Saset 100 ml</a>
-             <p class="text-danger priceShow">Rp20,000</p>
-             <a href="keranjang.html" type="button" class="btn btn-outline-danger text-danger br10">Add to cart</a>
-           </div>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-6">
-         <div class="card cardProduk">
-           <img src="assets/img/foto produk.png" class="card-img-top" alt="nama produk">
-           <div class="card-body">
-             <a href="user-detail-produk.html" class="mt-0">Frisian Flag Kemasan Saset 100 ml</a>
-             <p class="text-danger priceShow">Rp20,000</p>
-             <a href="keranjang.html" type="button" class="btn btn-outline-danger text-danger br10">Add to cart</a>
-           </div>
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-6">
-         <div class="card cardProduk">
-           <img src="assets/img/foto produk.png" class="card-img-top" alt="nama produk">
-           <div class="card-body">
-             <a href="user-detail-produk.html" class="mt-0">Frisian Flag Kemasan Saset 100 ml</a>
-             <p class="text-danger priceShow">Rp20,000</p>
-             <a href="keranjang.html" type="button" class="btn btn-outline-danger text-danger br10">Add to cart</a>
-           </div>
-         </div>
+       @endforeach
+       
        </div>
      </div>
 
