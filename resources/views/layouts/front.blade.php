@@ -62,7 +62,7 @@
                <form class="form-inline my-lg-0" action="{{ route('index') }}" method="GET">
                <div class="d-md-none d-sm-block mb-3">
                    <input name="keyword" class="form-control mr-sm-2 br10" type="text" placeholder="Kamu mau cari apa hari ini?" aria-label="Search">
-                   <a href="keranjang.html">
+                   <a data-toggle="modal" href="#cart" class="float" style="text-decoration: none;">
                      <div class="cart">
                        <span class="count">10</span>
                        <i class="fas fa-shopping-bag material-icons"></i>
@@ -90,10 +90,11 @@
                   </form>
                 </div>
      
-             <a href="keranjang.html" class="item">
+             <a data-toggle="modal" href="#cart" class="float" style="text-decoration: none;">
+              {{-- <span class="myOrder"><span class="total-count"></span></span> --}}
                <div class="group">
                  <div class="cart">
-                   <span class="count">10</span>
+                   <span class="count total-count"></span>
                    <i class="fas fa-shopping-bag material-icons"></i>
                  </div>
                </div>
