@@ -50,34 +50,28 @@
                </ul>
                <ul class="navbar-nav ml-auto">
                  <li class="nav-item active">
-                   <a class="nav-link" href="index.html">Beranda</a>
+                   <a class="nav-link" href="{{ route('index') }}">Beranda</a>
                  </li>
                  <li class="nav-item ">
-                   <a class="nav-link" href="tentang.html">Tentang Kami</a>
+                   <a class="nav-link" href="{{ route('products') }}">Produk</a>
                  </li>
                  <li class="nav-item ">
-                   <a class="nav-link" href="produk-login.html">Produk</a>
-                 </li>
-                 <li class="nav-item ">
-                   <a class="nav-link" href="supplier.html">Supplier</a>
-                 </li>
-                 <li class="nav-item ">
-                   <a class="nav-link" href="kontak.html">Kontak</a>
+                   <a class="nav-link" href="{{ route('login') }}">Login</a>
                  </li>
                </ul>
+               <form class="form-inline my-lg-0" action="{{ route('index') }}" method="GET">
                <div class="d-md-none d-sm-block mb-3">
-                 <form class="form-inline my-lg-0">
-                   <input class="form-control mr-sm-2 br10" type="search" placeholder="Kamu mau cari apa hari ini?" aria-label="Search">
-                 </form>
-                 <a href="keranjang.html">
-                   <div class="cart">
-                     <span class="count">10</span>
-                     <i class="fas fa-shopping-bag material-icons"></i>
-                   </div>
-                 </a>
-                 
-                 
-               </div>
+                   <input name="keyword" class="form-control mr-sm-2 br10" type="text" placeholder="Kamu mau cari apa hari ini?" aria-label="Search">
+                   <a data-toggle="modal" href="#cart" class="float" style="text-decoration: none;">
+                     <div class="cart">
+                       <span class="count">10</span>
+                       <i class="fas fa-shopping-bag material-icons"></i>
+                      </div>
+                    </a>
+                    
+                    
+                  </div>
+                </form>
              </div>
            </nav>
          </div>
@@ -87,17 +81,20 @@
            <nav class="navbarBottom">
              <div class="logo">
                <img class="img-fluid" src="{{ asset('images/logo-bonkid.png') }}" alt="logo afn group">
-             </div>
-             <div class="item search right" tabindex="0">
-               <div class="search-group">
-                 <input type="text" placeholder="Kamu mau cari apa hari ini?"><i class="fas fa-search material-icons search-icon"></i>
-               </div>
-             </div>
+              </div>
+              <div class="item search right" tabindex="0">
+                  <form class="form-inline my-lg-0" action="{{ route('index') }}" method="GET" style="width:80%">
+                    <div class="search-group">
+                      <input type="text" name="keyword" placeholder="Kamu mau cari apa hari ini?"><i class="fas fa-search material-icons search-icon"></i>
+                    </div>
+                  </form>
+                </div>
      
-             <a href="keranjang.html" class="item">
+             <a data-toggle="modal" href="#cart" class="float" style="text-decoration: none;">
+              {{-- <span class="myOrder"><span class="total-count"></span></span> --}}
                <div class="group">
                  <div class="cart">
-                   <span class="count">10</span>
+                   <span class="count total-count"></span>
                    <i class="fas fa-shopping-bag material-icons"></i>
                  </div>
                </div>
