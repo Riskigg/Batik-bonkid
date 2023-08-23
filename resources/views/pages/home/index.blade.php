@@ -17,7 +17,7 @@
          </nav>
        </div>
        @foreach ($products as $item)
-       <div class="col-lg-3 col-md-6">
+       <div class="col-md-3 col-6">
          <div class="card cardProduk">
            <img src="{{ asset('uploads/'.$item->image) }}" class="card-img-top" alt="{{ $item->name }}">
            <div class="card-body">
@@ -31,22 +31,38 @@
        
        </div>
      </div>
-
-     <nav aria-label="Page navigation example" class="pagination-produk mt-4">
-       <ul class="pagination justify-content-center">
-           <li class="page-item active">
-             <span class="page-link">
-               1
-               <span class="sr-only">(current)</span>
-             </span>
-           </li>
-           <li class="page-item"><a class="page-link" href="#">2</a></li>
-           <li class="page-item"><a class="page-link" href="#">3</a></li>
-           <li class="page-item">
-             <a class="page-link" href="#">Next</a>
-           </li>
-       </ul>
-     </nav>
+     {{-- @if ($search)
+                            {{ $doexam->appends(['name' => $name,'school' => $school,'date' => $date,'status' => $status])->links() }}
+                        @else
+                            {{ $doexam->links() }}
+                        @endif --}}
+     @if ($products->hasPages())
+        <nav aria-label="Page navigation example" class="pagination-produk mt-4">
+          <ul class="pagination justify-content-center">
+              {{-- Previous Page Link --}}
+              @if ($products->onFirstPage())
+                    {{-- <li class="page-item"><a class="page-link disabled" href="#"><i class="fas fa-angle-left"></i></a></li> --}}
+              @else
+                    <li class="page-item"><a class="page-link" href="{{ ($search) ? $products->previousPageUrl().'&keyword='.$keyword : $products->previousPageUrl()  }}" rel="prev"><i class="fas fa-angle-left"></i></a></li>
+              @endif
+              {{-- Pagination Elements --}}
+              @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                    @if ($page == $products->currentPage())
+                        <li class="page-item active"><a class="page-link" href="#">{{ $page }}</a><span></span></li>
+                    @else
+                        <li class="page-item"><a href="{{ ($search) ? $url.'&keyword='.$keyword : $url  }}" class="page-link">{{ $page }}</a></li>
+                    @endif
+              @endforeach
+              {{-- Next Page Link --}}
+              @if ($products->hasMorePages())
+                    <li class="page-item"><a class="page-link" href="{{ ($search) ? $products->nextPageUrl().'&keyword='.$keyword : $products->nextPageUrl()  }}" aria-label="Next" rel="next"><i class="fas fa-angle-right"></i> </a></li>
+              @else
+                    {{-- <li class="page-item"><a class="page-link disabled" href="#"><i class="fas fa-angle-right"></i></a></li> --}}
+              @endif
+            </ul>
+          </nav>
+      @endif
+     
 
    </div>
  </div>
