@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,10 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::post('/store', [ProductController::class, 'store'])->name('store');
                 Route::put('update/{id}', [ProductController::class, 'update'])->name('update');
                 Route::delete('/news/destroy/{new}', [ProductController::class, 'destroy'])->name('destroy');
+            });
+            Route::prefix('order/')->name('order.')->group(function () {
+                Route::get('/', [OrderController::class, 'index'])->name('index');
+                Route::get('/detail/{id}', [OrderController::class, 'show'])->name('show');
             });
         });
 });

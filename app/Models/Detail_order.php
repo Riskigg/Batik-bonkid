@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Detail_order extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'product_id', 
+        'order_id', 
+        'qty', 
+        'price', 
+        'subtotal'
+    ];
 }

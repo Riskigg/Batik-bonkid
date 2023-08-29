@@ -374,7 +374,7 @@ a:hover {
     color: #d7b856 !important;
 }
 .cardProduk .card-body p {
-    text-decoration: line-through black;
+    /* text-decoration: line-through black; */
 }
 .cardProduk .card-body p.priceShow {
     text-decoration: none;
