@@ -42,5 +42,9 @@ class HomeController extends Controller
         $data['i'] = (request()->input('page',1)-1)*$show;
         return view('pages.home.index', $data);
     }
+    function order(Request $request) {
+        dd($request->all());
+        
+    }
     
 }
