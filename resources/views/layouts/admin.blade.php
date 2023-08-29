@@ -69,7 +69,7 @@ License: You must have a valid license purchased only from above link or https:/
           </li>
           <li class="nav-item nav-category">Transaksi</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.order.index') }}" class="nav-link">
               <i class="link-icon" data-feather="calendar"></i>
               <span class="link-title">Orders</span>
             </a>

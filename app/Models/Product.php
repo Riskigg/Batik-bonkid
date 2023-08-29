@@ -20,4 +20,9 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function detail_order()
+    {
+        return $this->hasOne(Detail_order::class);
+    }
+    
 }

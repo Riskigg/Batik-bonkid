@@ -56,6 +56,10 @@ class OrderController extends Controller
     public function show($id)
     {
         //
+        $detail = Order::where('id',$id)->with('detail_order.product')->first();
+        $data['detail'] = $detail;
+        // dd($detail->toArray());
+        return view('admin.order.show', $data);
     }
 
     /**

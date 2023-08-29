@@ -14,4 +14,8 @@ class Order extends Model
         'total',
         'phone'
     ];
+    public function detail_order()
+    {
+        return $this->hasMany(Detail_order::class);
+    }
 }
