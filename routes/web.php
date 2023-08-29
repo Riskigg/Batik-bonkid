@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\ProductController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/products', [HomeController::class, 'index'])->name('products');
+Route::post('/order', [HomeController::class, 'order'])->name('order');
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function () {

@@ -22,7 +22,7 @@
            <img src="{{ asset('uploads/'.$item->image) }}" class="card-img-top" alt="{{ $item->name }}">
            <div class="card-body">
              <a href="user-detail-produk.html" class="mt-0">{{ $item->name }}</a>
-             <p class="text-danger priceShow">{{ $item->price }}</p>
+             <p class="text-danger priceShow">Rp. {{ number_format($item->price) }}</p>
              <button href="breadcrumb-header" data-id="{{ $item->id }}" data-name="{{ $item->name }}" data-price="{{ $item->price }}" type="button" class="add-to-cart btn btn-outline-danger text-danger br10">Add to cart</button>
            </div>
          </div>
@@ -66,53 +66,110 @@
 
    </div>
  </div>
- <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Shoping Cart</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <div class="row">
-                  <div class="col">
-                      <div class="form-group">
-                          <label>Nama Pemesan :</label>
-                          <input id="nama" name="nama" type="text" class="form-control" placeholder="Masukkan Nama Pemesan" name="nama_pemesan" required>
-                      </div>
-                      <div class="form-group">
-                          <label>Alamat :</label>
-                          <input id="alamat" name="alamat" type="text" class="form-control" placeholder="Masukkan Alamat Pemesan" name="nama_pemesan" required>
-                      </div>
-                      <div class="form-group">
-                          <label>No. HP :</label>
-                          <input id="nohp" name="nohp" type="text" class="form-control" placeholder="Masukkan No. HP Pemesan" name="nama_pemesan" required>
-                      </div>
-                  </div>
-                  <div class="col">
-                      <table class="show-cart table">
-                      </table>
-                      <div>Total Harga: Rp.<span class="total-cart"></span></div>
-                  </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <a href="#" class="clear-cart btn btn-secondary">Clear Cart</a>
-              <button type="submit" id="btnOrder" class="btn btn-primary" onclick="window.open(pemesanan(),'_blank')">Order now</button>
-          </div>
-      </div>
-  </div>
-</div>
 <a data-toggle="modal" href="#cart" class="float" style="text-decoration: none;">
   <span class="myOrder"><span class="total-count"></span></span>
   <i class="fa fa-shopping-cart my-float"></i>
 </a>
+<div id="cart" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Shoping Cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Modal Body (2/3) -->
+            <div class="modal-body" id="serviceModalMultiStep">
+
+                <!-- Progress Bar -->
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" style="width: 20%;">
+                    </div>
+                </div>
+
+                <!-- Tab Steps-->
+                <div class="navbar d-none">
+                    <div class="navbar-inner">
+                        <ul class="nav nav-tabs nav-justified">
+                            <li class="active">
+                                <a href="#step1" data-toggle="tab" data-step="1">Keranjang</a>
+                            </li>
+                            <li>
+                                <a href="#step2" data-toggle="tab" data-step="2">Data Pemesan</a>
+                            </li>
+                            <li>
+                                
+                                <a href="#step3" data-toggle="tab" data-step="3">Pembayaran</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <form action="{{ route('order') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                <!-- Tab Content -->
+                    <div class="tab-content">
+                        <!-- Tab 1 -->
+                        <div class="tab-pane active" id="step1">
+                            <h4>Keranjang</h4>
+                            <table class="show-cart table">
+                            </table>
+                            <div>Total Harga: Rp.<span class="total-cart"></span></div>
+                        </div>
+
+                        <!-- Tab 2 -->
+                        <div class="tab-pane" id="step2">
+                            <h4>Data Pemesan</h4>
+                            <div class="form-group">
+                                <label>Nama Pemesan :</label>
+                                <input id="nama" name="nama" type="text" class="form-control" placeholder="Masukkan Nama Pemesan" name="nama_pemesan" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Alamat :</label>
+                                <input id="alamat" name="alamat" type="text" class="form-control" placeholder="Masukkan Alamat Pemesan" name="nama_pemesan" required>
+                            </div>
+                            <div class="form-group">
+                                <label>No. HP :</label>
+                                <input id="nohp" name="nohp" type="text" class="form-control" placeholder="Masukkan No. HP Pemesan" name="nama_pemesan" required>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="step3">
+                            <h4>Informasi Tagihan</h4>
+                            <hr>
+                            <h6 class="text-center">Total Tagihan</h6>
+                            <h2 class="text-center">
+                                Rp.<span class="total-cart"></span>
+                            </h2>
+                            <hr>
+                            <img src="{{ asset('images/qris.jpg') }}" class="img-fluid mt-2" alt="">
+                            <button type="submit"  class="btn btn-success btn-block">Konfirmasi Pembayaran</button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+            <!-- Modal Footer (3/3) -->
+            <div class="modal-footer">
+                <div class="right-footer">
+                    <a class="btn btn-outline-danger back" href="#">Back</a>
+                    <a class="btn btn-success next" href="#">Next</a>
+                </div>
+                <!-- <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button> -->
+                <!-- <button class="btn btn-primary">Save changes</button> -->
+            </div>
+
+        </div>
+    </div>
+</div>
 @endsection
 @section('scripts')
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function formatNumber(num) {
             return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
@@ -128,7 +185,7 @@
             for (var c in myCart) {
                 resultCart += '' + myCart[c].name + '%20%20%20%20%20%20%20%20' + myCart[c].count + 'x%20' + '(Rp.' + formatNumber(myCart[c].price) + ')%20%0a';
             }
-            var url = 'https://wa.me/{{ substr("891239123" ,1)}}?text=Hallo,%20Saya%20mau%20order %0a Nama :' + nama + ' %0a Alamat :' + alamat + ' %0a No. Hp : ' + nohp + ' %0a ' + resultCart + '%0a Total :%20%20%20%20%20%20%20%20%20%20%20%20' + 'Rp.' + formatNumber(shoppingCart.totalCart()) ;
+            var url = 'https://wa.me/62{{ substr("081325002309" ,1)}}?text=Hallo,%20Saya%20mau%20konfirmasi pembayaran: %0a Nama :' + nama + ' %0a Alamat :' + alamat + ' %0a No. Hp : ' + nohp + ' %0a ' + resultCart + '%0a Total :%20%20%20%20%20%20%20%20%20%20%20%20' + 'Rp.' + formatNumber(shoppingCart.totalCart()) ;
             return url;
         }
 
@@ -138,20 +195,24 @@
                 var alamat = $('#alamat').val();
                 var nohp = $('#nohp').val();
                 var totalBayar = shoppingCart.totalCart();
+                var myCart = shoppingCart.listCart();
                 if (nama != "" && alamat != "" && nohp != "" && totalBayar != 0) {
                     $("#btnOrder").attr("disabled", "disabled");
                     $.ajax({
-                        url: "{{ route('index') }}",
+                        url: "{{ route('order') }}",
                         type: "POST",
                         data: {
-                            type: 1,
+                            "_token":"{{ csrf_token() }}",
                             nama: nama,
                             alamat: alamat,
                             nohp: nohp,
-                            totalBayar: totalBayar
+                            totalBayar: totalBayar,
+                            myCart: myCart
+
                         },
                         cache: false,
                         success: function(dataResult) {
+                            console.log()
                             var dataResult = JSON.parse(dataResult);
                             if (dataResult.statusCode == 200) {
                                 $("#btnOrder").removeAttr("disabled");
@@ -305,6 +366,11 @@
             var name = $(this).data('name');
             var price = Number($(this).data('price'));
             shoppingCart.addItemToCart(id, name, price, 1);
+            Swal.fire(
+            'Berhasil!',
+            'Menambahkan Produk Ke keranjang!',
+            'success'
+            )
             displayCart();
         });
 
@@ -321,11 +387,13 @@
                 output += "<tr>" +
                     "<td class='card-title'>" + cartArray[i].name + "<br/><span>(Rp." + formatNumber(cartArray[i].price) + ")</span></td>" +
                     "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-id=" + cartArray[i].id + ">-</button>" +
-                    "<input type='number' class='item-count form-control' data-id='" + cartArray[i].id + "' value='" + cartArray[i].count + "'>" +
+                    "<input name='qty[]' type='number' oninput='this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null' min='1' class='item-count form-control' data-id='" + cartArray[i].id + "' value='" + cartArray[i].count + "'>" +
+                    "<input name='product_id[]' type='hidden'  min='1' class='form-control' data-id='" + cartArray[i].id + "' value='" + cartArray[i].id + "'>" +
                     "<button class='plus-item btn btn-primary input-group-addon' data-id=" + cartArray[i].id + ">+</button></div></td>" +
                     "<!--<td><button class='delete-item btn btn-danger' data-id=" + cartArray[i].id + ">X</button></td>-->" +
                     " = " +
                     "<!--<td>Rp." + formatNumber(cartArray[i].total) + "</td>-->" +
+                    "<input name='total' type='hidden'  min='1' class='form-control' value='" + cartArray[i].total + "'>" +
                     "</tr>";
             }
             $('.show-cart').html(output);
@@ -364,7 +432,93 @@
         });
 
         displayCart();
+        
+
+    </script>
+    <script>
+        $(document).ready(function() {
+            var nStep = 3;
+            var firstTab = $(".tab-pane:first-child").attr("id");
+            var prevTab = $(".tab-pane.active")
+                .prev()
+                .attr("id");
+            var nextTab = $(".tab-pane.active")
+                .next()
+                .attr("id");
+            var lastTab = $(".tab-pane:last-child").attr("id");
+
+            $(".progress-bar").text("Step 1 of " + nStep);
+            $(".back, .first").hide();
+
+            $(".next").click(function() {
+                var nextId = $(".tab-pane.active")
+                    .next()
+                    .attr("id");
+                // alert(nextId + ' ? ' + lastTab);
+                $('[href="#' + nextId + '"]').tab("show");
+
+                $(".back, .first").css("display", "unset");
+                if (nextId == lastTab) {
+                    $(".next").hide();
+                    // show submit button
+                }
+
+                return false;
+            });
+
+            $(".back").click(function() {
+                var backId = $(".tab-pane.active")
+                    .prev()
+                    .attr("id");
+                // alert(backId);
+                $('[href="#' + backId + '"]').tab("show");
+
+                $(".next").css("display", "unset");
+                if (backId === "step1") {
+                    $(".back, .first").css("display", "none");
+                }
+
+                return false;
+            });
+
+            $(".nav-tabs li:first-child").click(function() {
+                $(".back, .first").css("display", "none");
+                $(".next").css("display", "unset");
+            });
+
+            $(".nav-tabs li:not(:first-child)").click(function() {
+                $(".back, .first").css("display", "unset");
+            });
+
+            $(".nav-tabs li:last-child").click(function() {
+                $(".next").css("display", "none");
+            });
+
+            $(".nav-tabs li:not(:last-child)").click(function() {
+                $(".next").css("display", "unset");
+            });
+
+            $('a[data-toggle="tab"]').on("shown.bs.tab", function(e) {
+                var step = $(e.target).data("step");
+                var percent = parseInt(step) / nStep * 100;
+
+                $(".progress-bar").css({ width: percent + "%" });
+                $(".progress-bar").text("Step " + step + " of " + nStep);
+            });
+
+            $(".first").click(function() {
+                $('[href="#' + firstTab + '"]').tab("show");
+                $(".back, .first").css("display", "none");
+                $(".next").css("display", "unset");
+            });
+        });
 
     </script>
     
+    
+@endsection
+@section('head')
+    <style>
+
+    </style>
 @endsection
