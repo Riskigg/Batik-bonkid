@@ -123,15 +123,15 @@
                             <h4>Data Pemesan</h4>
                             <div class="form-group">
                                 <label>Nama Pemesan :</label>
-                                <input id="nama" name="nama" type="text" class="form-control" placeholder="Masukkan Nama Pemesan" name="nama_pemesan" required>
+                                <input id="nama" name="nama" type="text" class="form-control input-cart" placeholder="Masukkan Nama Pemesan" name="nama_pemesan" required>
                             </div>
                             <div class="form-group">
                                 <label>Alamat :</label>
-                                <input id="alamat" name="alamat" type="text" class="form-control" placeholder="Masukkan Alamat Pemesan" name="nama_pemesan" required>
+                                <input id="alamat" name="alamat" type="text" class="form-control input-cart" placeholder="Masukkan Alamat Pemesan" name="nama_pemesan" required>
                             </div>
                             <div class="form-group">
                                 <label>No. HP :</label>
-                                <input id="nohp" name="nohp" type="text" class="form-control" placeholder="Masukkan No. HP Pemesan" name="nama_pemesan" required>
+                                <input id="nohp" name="nohp" type="text" class="form-control input-cart" placeholder="Masukkan No. HP Pemesan" name="nama_pemesan" required>
                             </div>
                         </div>
 
@@ -144,7 +144,7 @@
                             </h2>
                             <hr>
                             <img src="{{ asset('images/qris.jpg') }}" class="img-fluid mt-2" alt="">
-                            <button type="submit"  class="btn btn-success btn-block">Konfirmasi Pembayaran</button>
+                            <button type="submit"  class="btn btn-success btn-block" onclick="window.open(pemesanan(),'_blank')">Konfirmasi Pembayaran</button>
                         </div>
 
                     </div>
@@ -463,7 +463,6 @@
                     // show submit button
                 }
 
-                return false;
             });
 
             $(".back").click(function() {
