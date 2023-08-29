@@ -45,7 +45,7 @@
              <div class="collapse navbar-collapse" id="navbarText">
                <ul class="navbar-nav mr-auto">
                  <li class="nav-item d-none d-md-block">
-                   <a class="nav-link" href="#"><i class="fas fa-phone"></i> 08331-3456-9879</a>
+                   <a class="nav-link" href="#"><i class="fas fa-phone"></i> 087812265965</a>
                  </li>
                </ul>
                <ul class="navbar-nav ml-auto">

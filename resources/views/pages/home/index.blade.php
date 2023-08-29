@@ -21,8 +21,9 @@
          <div class="card cardProduk">
            <img src="{{ asset('uploads/'.$item->image) }}" class="card-img-top" alt="{{ $item->name }}">
            <div class="card-body">
-             <a href="user-detail-produk.html" class="mt-0">{{ $item->name }}</a>
+             <a href="#" class="mt-0">{{ $item->name }}</a>
              <p class="text-danger priceShow">Rp. {{ number_format($item->price) }}</p>
+             <p>{{ $item->deskripsi }}</p>
              <button href="breadcrumb-header" data-id="{{ $item->id }}" data-name="{{ $item->name }}" data-price="{{ $item->price }}" type="button" class="add-to-cart btn btn-outline-danger text-danger br10">Add to cart</button>
            </div>
          </div>
@@ -123,15 +124,15 @@
                             <h4>Data Pemesan</h4>
                             <div class="form-group">
                                 <label>Nama Pemesan :</label>
-                                <input id="nama" name="nama" type="text" class="form-control input-cart" placeholder="Masukkan Nama Pemesan" name="nama_pemesan" required>
+                                <input id="nama" name="name" type="text" class="form-control input-cart" placeholder="Masukkan Nama Pemesan" required>
                             </div>
                             <div class="form-group">
                                 <label>Alamat :</label>
-                                <input id="alamat" name="alamat" type="text" class="form-control input-cart" placeholder="Masukkan Alamat Pemesan" name="nama_pemesan" required>
+                                <input id="alamat" name="address" type="text" class="form-control input-cart" placeholder="Masukkan Alamat Pemesan" required>
                             </div>
                             <div class="form-group">
                                 <label>No. HP :</label>
-                                <input id="nohp" name="nohp" type="text" class="form-control input-cart" placeholder="Masukkan No. HP Pemesan" name="nama_pemesan" required>
+                                <input id="nohp" name="phone" type="text" class="form-control input-cart" placeholder="Masukkan No. HP Pemesan" required>
                             </div>
                         </div>
 
@@ -156,7 +157,7 @@
             <div class="modal-footer">
                 <div class="right-footer">
                     <a class="btn btn-outline-danger back" href="#">Back</a>
-                    <a class="btn btn-success next" href="#">Next</a>
+                    <a class="btn btn-success next" disabled href="#">Next</a>
                 </div>
                 <!-- <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button> -->
                 <!-- <button class="btn btn-primary">Save changes</button> -->
@@ -185,51 +186,51 @@
             for (var c in myCart) {
                 resultCart += '' + myCart[c].name + '%20%20%20%20%20%20%20%20' + myCart[c].count + 'x%20' + '(Rp.' + formatNumber(myCart[c].price) + ')%20%0a';
             }
-            var url = 'https://wa.me/62{{ substr("081325002309" ,1)}}?text=Hallo,%20Saya%20mau%20konfirmasi pembayaran: %0a Nama :' + nama + ' %0a Alamat :' + alamat + ' %0a No. Hp : ' + nohp + ' %0a ' + resultCart + '%0a Total :%20%20%20%20%20%20%20%20%20%20%20%20' + 'Rp.' + formatNumber(shoppingCart.totalCart()) ;
+            var url = 'https://wa.me/62{{ substr("087812265965" ,1)}}?text=Hallo,%20Saya%20mau%20konfirmasi pembayaran: %0a Nama :' + nama + ' %0a Alamat :' + alamat + ' %0a No. Hp : ' + nohp + ' %0a ' + resultCart + '%0a Total :%20%20%20%20%20%20%20%20%20%20%20%20' + 'Rp.' + formatNumber(shoppingCart.totalCart()) ;
             return url;
         }
 
-        $(document).ready(function() {
-            $('#btnOrder').on('click', function() {
-                var nama = $('#nama').val();
-                var alamat = $('#alamat').val();
-                var nohp = $('#nohp').val();
-                var totalBayar = shoppingCart.totalCart();
-                var myCart = shoppingCart.listCart();
-                if (nama != "" && alamat != "" && nohp != "" && totalBayar != 0) {
-                    $("#btnOrder").attr("disabled", "disabled");
-                    $.ajax({
-                        url: "{{ route('order') }}",
-                        type: "POST",
-                        data: {
-                            "_token":"{{ csrf_token() }}",
-                            nama: nama,
-                            alamat: alamat,
-                            nohp: nohp,
-                            totalBayar: totalBayar,
-                            myCart: myCart
+        // $(document).ready(function() {
+        //     $('#btnOrder').on('click', function() {
+        //         var nama = $('#nama').val();
+        //         var alamat = $('#alamat').val();
+        //         var nohp = $('#nohp').val();
+        //         var totalBayar = shoppingCart.totalCart();
+        //         var myCart = shoppingCart.listCart();
+        //         if (nama != "" && alamat != "" && nohp != "" && totalBayar != 0) {
+        //             $("#btnOrder").attr("disabled", "disabled");
+        //             $.ajax({
+        //                 url: "{{ route('order') }}",
+        //                 type: "POST",
+        //                 data: {
+        //                     "_token":"{{ csrf_token() }}",
+        //                     nama: nama,
+        //                     alamat: alamat,
+        //                     nohp: nohp,
+        //                     totalBayar: totalBayar,
+        //                     myCart: myCart
 
-                        },
-                        cache: false,
-                        success: function(dataResult) {
-                            console.log()
-                            var dataResult = JSON.parse(dataResult);
-                            if (dataResult.statusCode == 200) {
-                                $("#btnOrder").removeAttr("disabled");
-                                shoppingCart.clearCart()
-                                // $('#orderForm').find('input:text').val('');
-                                // $("#success").show();
-                                // $('#success').html('Data added successfully !');
-                            } else if (dataResult.statusCode == 201) {
-                                alert("Error occured !");
-                            }
-                        }
-                    });
-                } else {
-                    alert('Silahkan lengkapi data terlebih dahulu.');
-                }
-            });
-        });
+        //                 },
+        //                 cache: false,
+        //                 success: function(dataResult) {
+        //                     console.log()
+        //                     var dataResult = JSON.parse(dataResult);
+        //                     if (dataResult.statusCode == 200) {
+        //                         $("#btnOrder").removeAttr("disabled");
+        //                         shoppingCart.clearCart()
+        //                         // $('#orderForm').find('input:text').val('');
+        //                         // $("#success").show();
+        //                         // $('#success').html('Data added successfully !');
+        //                     } else if (dataResult.statusCode == 201) {
+        //                         alert("Error occured !");
+        //                     }
+        //                 }
+        //             });
+        //         } else {
+        //             alert('Silahkan lengkapi data terlebih dahulu.');
+        //         }
+        //     });
+        // });
 
         // ************************************************
 
@@ -389,6 +390,7 @@
                     "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-id=" + cartArray[i].id + ">-</button>" +
                     "<input name='qty[]' type='number' oninput='this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null' min='1' class='item-count form-control' data-id='" + cartArray[i].id + "' value='" + cartArray[i].count + "'>" +
                     "<input name='product_id[]' type='hidden'  min='1' class='form-control' data-id='" + cartArray[i].id + "' value='" + cartArray[i].id + "'>" +
+                    "<input name='price[]' type='hidden'  min='1' class='form-control' data-id='" + cartArray[i].id + "' value='" + cartArray[i].price + "'>" +
                     "<button class='plus-item btn btn-primary input-group-addon' data-id=" + cartArray[i].id + ">+</button></div></td>" +
                     "<!--<td><button class='delete-item btn btn-danger' data-id=" + cartArray[i].id + ">X</button></td>-->" +
                     " = " +
@@ -451,17 +453,38 @@
             $(".back, .first").hide();
 
             $(".next").click(function() {
+                
                 var nextId = $(".tab-pane.active")
-                    .next()
-                    .attr("id");
-                // alert(nextId + ' ? ' + lastTab);
-                $('[href="#' + nextId + '"]').tab("show");
-
-                $(".back, .first").css("display", "unset");
-                if (nextId == lastTab) {
-                    $(".next").hide();
-                    // show submit button
+                .next()
+                .attr("id");
+                // var currentStep = nextId;
+                // console.log(currentStep);
+                var isValid = true;
+                if (nextId=='step3') {
+                    var curStep = $('#step2'),
+                    curInputs = curStep.find("input[type='text'],input[type='url']");
+                    console.log(curInputs);
+                    $(".form-control").removeClass("is-invalid");
+                    for(var i=0; i<curInputs.length; i++){
+                        if (!curInputs[i].validity.valid){
+                            isValid = false;
+                            $(curInputs[i]).closest(".form-control").addClass("is-invalid");
+                        }
+                    }
+                } 
+ 
+                if (isValid){
+                    $('[href="#' + nextId + '"]').tab("show");
+                    $(".back, .first").css("display", "unset");
+                    if (nextId == lastTab) {
+                        $(".next").hide();
+                    }
+                }else{
+                    $(".back, .first").css("display", "unset");
+                    $('[href="#step2"]').tab("show");
                 }
+                
+
 
             });
 
