@@ -186,7 +186,7 @@
             for (var c in myCart) {
                 resultCart += '' + myCart[c].name + '%20%20%20%20%20%20%20%20' + myCart[c].count + 'x%20' + '(Rp.' + formatNumber(myCart[c].price) + ')%20%0a';
             }
-            var url = 'https://wa.me/62{{ substr("081325002309" ,1)}}?text=Hallo,%20Saya%20mau%20konfirmasi pembayaran: %0a Nama :' + nama + ' %0a Alamat :' + alamat + ' %0a No. Hp : ' + nohp + ' %0a ' + resultCart + '%0a Total :%20%20%20%20%20%20%20%20%20%20%20%20' + 'Rp.' + formatNumber(shoppingCart.totalCart()) ;
+            var url = 'https://wa.me/62{{ substr("087812265965" ,1)}}?text=Hallo,%20Saya%20mau%20konfirmasi pembayaran: %0a Nama :' + nama + ' %0a Alamat :' + alamat + ' %0a No. Hp : ' + nohp + ' %0a ' + resultCart + '%0a Total :%20%20%20%20%20%20%20%20%20%20%20%20' + 'Rp.' + formatNumber(shoppingCart.totalCart()) ;
             return url;
         }
 
