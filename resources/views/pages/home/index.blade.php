@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="breadcrumb-header">
-   <h1 class="title">List Produk</h1>
+   <h1 class="title">@lang('content.banner')</h1>
  </div>
 
  <div id="contentWhite">
@@ -11,8 +11,8 @@
        <div class="col-md-12">
          <nav aria-label="breadcrumb">
            <ol class="breadcrumb">
-             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-             <li class="breadcrumb-item active" aria-current="page">List Produk</li>
+             <li class="breadcrumb-item"><a href="index.html">@lang('content.nav1')</a></li>
+             <li class="breadcrumb-item active" aria-current="page">@lang('content.banner')</li>
            </ol>
          </nav>
        </div>
@@ -23,14 +23,15 @@
            <div class="card-body">
              <a href="#" class="mt-0">{{ $item->name }}</a>
              <p class="text-danger priceShow">Rp. {{ number_format($item->price) }}</p>
+             <p>@lang('content.stok'): {{ $item->qty }}</p>
              <p>{{ $item->deskripsi }}</p>
              <div class="row">
                 <div class="col-md-6 mb-2">
-                    <button href="breadcrumb-header" data-id="{{ $item->id }}" data-name="{{ $item->name }}" data-price="{{ $item->price }}" type="button" class="add-to-cart btn-block btn-sm btn btn-outline-danger text-danger br10">Add to cart</button>
+                    <button href="breadcrumb-header" data-id="{{ $item->id }}" data-name="{{ $item->name }}" data-price="{{ $item->price }}" type="button" class="add-to-cart btn-block btn-sm btn btn-outline-danger text-danger br10">@lang('content.cart')</button>
                 </div>
                 <div class="col-md-6">
-                    <a href="https://wa.me/62{{ substr("087812265965" ,1)}}?text=Hallo,%20Saya%20mau%20tanya%20apakah%20produk%20{{ $item->name }}" target="_blank">
-                        <button  class="btn btn-sm btn-block btn-outline-success br10">Chat</button>
+                    <a href="https://wa.me/62{{ substr("087812265965" ,1)}}?text=Hallo,%20Saya%20mau%20tanya%20apakah%20produk%20{{ $item->name }}%20ini%20masih%20ada%20?" target="_blank">
+                        <button  class="btn btn-sm btn-block btn-outline-success br10">@lang('content.chat')</button>
                     </a>
                 </div>
              </div>
@@ -38,7 +39,7 @@
          </div>
        </div>
        @endforeach
-       
+
        </div>
      </div>
      {{-- @if ($search)
@@ -72,7 +73,7 @@
             </ul>
           </nav>
       @endif
-     
+
 
    </div>
  </div>
@@ -110,7 +111,7 @@
                                 <a href="#step2" data-toggle="tab" data-step="2">Data Pemesan</a>
                             </li>
                             <li>
-                                
+
                                 <a href="#step3" data-toggle="tab" data-step="3">Pembayaran</a>
                             </li>
                         </ul>
@@ -331,7 +332,7 @@
                 saveCart();
             }
 
-            // Count cart 
+            // Count cart
             obj.totalCount = function() {
                 var totalCount = 0;
                 for (var item in cart) {
@@ -368,7 +369,7 @@
 
         // *****************************************
         // Triggers / Events
-        // ***************************************** 
+        // *****************************************
         // Add item
         $('.add-to-cart').click(function(event) {
             event.preventDefault();
@@ -443,7 +444,7 @@
         });
 
         displayCart();
-        
+
 
     </script>
     <script>
@@ -462,7 +463,7 @@
             $(".back, .first").hide();
 
             $(".next").click(function() {
-                
+
                 var nextId = $(".tab-pane.active")
                 .next()
                 .attr("id");
@@ -480,8 +481,8 @@
                             $(curInputs[i]).closest(".form-control").addClass("is-invalid");
                         }
                     }
-                } 
- 
+                }
+
                 if (isValid){
                     $('[href="#' + nextId + '"]').tab("show");
                     $(".back, .first").css("display", "unset");
@@ -492,7 +493,7 @@
                     $(".back, .first").css("display", "unset");
                     $('[href="#step2"]').tab("show");
                 }
-                
+
 
 
             });
@@ -545,8 +546,8 @@
         });
 
     </script>
-    
-    
+
+
 @endsection
 @section('head')
     <style>

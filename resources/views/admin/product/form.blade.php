@@ -19,12 +19,12 @@
 	<!-- endinject -->
 	<!-- custom js for this page -->
 	<script src="{{ asset('assets/js/tinymce.js') }}"></script>
-    
+
 	<script src="{{ asset('assets/vendors/dropify/dist/dropify.min.js') }}"></script>
 	<!-- custom js for this page -->
 	<script src="{{ asset('assets/js/dropify.js') }}"></script>
 @endsection
- 
+
 @section('content')
 <div class="page-content">
     <div class="row mb-2">
@@ -32,7 +32,7 @@
             <a href="{{ route('admin.product.index') }}" class="btn btn-outline-success btn-sm"><i class="feather-icon" data-feather="chevron-left"></i> Kembali</a>
         </div>
         <div class="col-md-10 text-right">
-            
+
         </div>
     </div>
     <div class="row">
@@ -73,12 +73,19 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputText1">Stok</label>
+                            <input type="number" class="form-control @error('qty') is-invalid @enderror" name="qty" placeholder="Masukan Stok" value="{{ @$edit_mode ? $detail->qty : old('qty') }}">
+                            @error('qty')
+                                <label id="qty-error" class="error mt-2 text-danger" for="qty">{{$message}}</label>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputText1">Category</label>
                             <select name="category_id" id="" class="form-select @error('category_id') is-invalid @enderror">
                                 @if (@$edit_mode)
                                     @foreach ($category as $item)
                                         <option value="{{ $item->id }}" {{ ($detail->category_id == $item->id) ? "selected":"";}}>{{ $item->name }}</option>
-                                        
+
                                     @endforeach
                                 @else
                                     @foreach ($category as $item)
@@ -97,7 +104,7 @@
                                 <label id="image-error" class="error mt-2 text-danger" for="image">{{$message}}</label>
                             @enderror
                         </div>
-                        
+
                         <button class="btn btn-primary" type="submit">Submit form</button>
                     </form>
                 </div>

@@ -33,7 +33,7 @@ a:hover {
 
 /*navbar*/
 .displayNavbarTop {
-    background-color: #D2B663;
+    background-color: #0a0a09;
 }
 .displayNavbarTop a {
     font-size: 14px;
@@ -43,6 +43,9 @@ a:hover {
 }
 .displayNavbarTop .navbar-brand {
     display: none;
+}
+.displayNavbarTop .btn-dropdown {
+    color: white;
 }
 .displayNavbarTop .dropbtn {
     background-color: transparent;
@@ -128,7 +131,7 @@ a:hover {
   width: 100%;
   padding: 6px ;
   outline: none;
-  border: 2px solid grey; 
+  border: 2px solid grey;
   max-width: 100%;
   border: 0;
 }
@@ -283,13 +286,13 @@ a:hover {
     margin-bottom: 12px;
 }
 .footer-widget ul li a {
-     color: #8D92A3; 
+     color: #8D92A3;
 }
 .footer-widget ul li a:hover {
     color: #d7b856;
 }
 .footer {
-    background-color: #D2B663;
+    background-color: #080808;
     color: #fff;
     font-size: 16px;
     text-align: center;
@@ -357,6 +360,7 @@ a:hover {
     background-color: #f5f5f5;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
+    height: 400px;
 }
 .cardProduk .card-body {
     padding: 14px 8px;
@@ -396,7 +400,7 @@ a:hover {
 /*produk*/
 #breadcrumb-header {
     padding: 80px 10px;
-    background-image: url(../img/breadcrumb.jpg);
+    background-image: url(../img/batik.png);
     background-size: cover;
 }
 #breadcrumb-header .title {

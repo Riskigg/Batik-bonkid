@@ -23,7 +23,7 @@ License: You must have a valid license purchased only from above link or https:/
 	<link rel="stylesheet" href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
 	<!-- endinject -->
-  <!-- Layout styles -->  
+  <!-- Layout styles -->
 	<link rel="stylesheet" href="{{ asset('assets/css/demo_1/style.css') }}">
   <!-- End layout styles -->
   <link rel="shortcut icon" href="{{ asset('images/logo-bonkid-simple.png') }}" />
@@ -54,7 +54,7 @@ License: You must have a valid license purchased only from above link or https:/
             </a>
           </li>
           <li class="nav-item nav-category">Products</li>
-          
+
           <li class="nav-item">
             <a href="{{ route('admin.category.index') }}" class="nav-link">
               <i class="link-icon" data-feather="inbox"></i>
@@ -77,11 +77,11 @@ License: You must have a valid license purchased only from above link or https:/
         </ul>
       </div>
     </nav>
-    
+
 		<!-- partial -->
-	
+
 		<div class="page-wrapper">
-					
+
 			<!-- partial:partials/_navbar.html -->
 			<nav class="navbar">
 				<a href="#" class="sidebar-toggler">
@@ -99,7 +99,7 @@ License: You must have a valid license purchased only from above link or https:/
 						</div>
 					</form>
 					<ul class="navbar-nav">
-						
+
 						<li class="nav-item dropdown nav-profile">
 							<a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<img src="{{ asset('images/logo-bonkid-simple.png') }}" alt="profile">
@@ -135,14 +135,14 @@ License: You must have a valid license purchased only from above link or https:/
 			</nav>
 			<!-- partial -->
       @yield('content')
-      
+      @yield('modal')
 
 			<!-- partial:partials/_footer.html -->
 			<footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
-				
+
 			</footer>
 			<!-- partial -->
-		
+
 		</div>
 	</div>
 
@@ -166,5 +166,12 @@ License: You must have a valid license purchased only from above link or https:/
   <script src="{{ asset('assets/js/datepicker.js') }}"></script>
 	<!-- end custom js for this page -->
   @yield('scripts')
+  <script>
+      $('.btn-changeStatus').on('click', function(){
+          let id = $(this).data('id');
+
+          $('.order').val(id);
+        });
+  </script>
 </body>
-</html>    
+</html>

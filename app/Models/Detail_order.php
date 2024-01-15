@@ -9,11 +9,11 @@ class Detail_order extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'product_id', 
-        'order_id', 
-        'qty', 
-        'price', 
-        'subtotal'
+        'product_id',
+        'order_id',
+        'qty',
+        'price',
+        'subtotal',
     ];
     public function order()
     {

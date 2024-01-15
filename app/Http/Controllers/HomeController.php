@@ -6,26 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Detail_order;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         // $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index(Request $request)
     {
+
         $show = 12;
         if ($request->has('keyword')) {
             $data['search'] = true;
@@ -44,6 +37,7 @@ class HomeController extends Controller
         $data['i'] = (request()->input('page',1)-1)*$show;
         return view('pages.home.index', $data);
     }
+
     public function order(Request $request) {
         // dd($request->all());
         $request->validate([
@@ -51,7 +45,6 @@ class HomeController extends Controller
             'address' => 'required',
             'phone' => 'required'
         ]);
-        
 
         $order = [
             'name' => $request->name,
@@ -69,8 +62,8 @@ class HomeController extends Controller
         }
         Detail_order::insert($detail);
         // dd($detail);
-        return redirect()->route('admin.product.index');
-        
+        return redirect()->route('index');
+
     }
-    
+
 }

@@ -19,11 +19,6 @@ class ProductController extends Controller
         return view('admin.product.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $category = Category::latest()->get();
@@ -31,22 +26,17 @@ class ProductController extends Controller
         return view('admin.product.form',$data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
             'deskripsi' => 'required',
             'price' => 'required',
+            'qty' => 'required',
             'category_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:8192',
         ]);
-        
+
         $input = $request->all();
 
         $data_product = [
@@ -54,6 +44,7 @@ class ProductController extends Controller
             'deskripsi' => $request->deskripsi,
             'category_id' => $request->category_id,
             'price' => $request->price,
+            'qty' => $request->qty,
         ];
 
         if ($request->has('image')) {
@@ -62,30 +53,13 @@ class ProductController extends Controller
         }
 
         // dd($data_product);
-    
+
         Product::create($data_product);
 
         return redirect()->route('admin.product.index')
                         ->with('success','Product created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(product $product)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit(product $product, $id)
     {
         $detail = Product::where('id', $id)->first();
@@ -93,36 +67,27 @@ class ProductController extends Controller
         $data['category'] = $category;
         $data['detail'] = $detail;
         $data['edit_mode'] = true;
-        
+
         return view('admin.product.form', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, product $product, $id)
     {
         $request->validate([
             'name' => 'required',
             'deskripsi' => 'required',
             'price' => 'required',
+            'qty' => 'required',
             'category_id' => 'required',
-
         ]);
 
         $product = Product::findorfail($id);
-
-
-        
 
         $data_product = [
             'name' => $request->name,
             'deskripsi' => $request->deskripsi,
             'price' => $request->price,
+            'qty' => $request->qty,
             'category_id' => $request->category_id,
         ];
 
@@ -143,12 +108,6 @@ class ProductController extends Controller
             ->with('success', 'Product updated succes sfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $product = Product::where('id', $id)->firstOrFail();

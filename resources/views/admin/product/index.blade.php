@@ -17,7 +17,7 @@
   <script src="{{ asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
   <script src="{{ asset('assets/js/data-table.js') }}"></script>
 @endsection
- 
+
 @section('content')
 <div class="page-content">
     <div class="row">
@@ -46,6 +46,7 @@
                         <th>Name</th>
                         <th>Price</th>
                         <th>Category</th>
+                        <th>Stok</th>
                         <th class="text-right">Action</th>
                     </tr>
                     </thead>
@@ -57,20 +58,21 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->price }}</td>
                             <td>{{ $item->category->name }}</td>
+                            <td>{{ $item->qty }}</td>
                             <td class="text-right">
                                 <form action="{{ route('admin.product.destroy',$item->id) }}" method="POST">
-    
+
                                     <a class="btn btn-sm btn-success" href="{{ route('admin.product.edit',$item->id) }}">Edit</a>
-                     
+
                                     @csrf
                                     @method('DELETE')
-                        
+
                                     <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-sm btn-danger">Delete</button>
                                 </form>
                             </td>
-                        </tr>    
+                        </tr>
                         @endforeach
-                    
+
                     </tbody>
                 </table>
                 </div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\NewsController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Admin\OrderController;
 |
 */
 
+Route::get("lang/{locale}", [LanguageController::class, 'changeLanguage']);
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/products', [HomeController::class, 'index'])->name('products');
 Route::post('/order', [HomeController::class, 'order'])->name('order');
@@ -28,6 +30,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
         Route::prefix('admin/')->name('admin.')->group(function() {
             Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
+            Route::get('/alamat', [DashboardController::class, 'alamat'])->name('alamat');
             Route::prefix('category/')->name('category.')->group(function () {
                 Route::get('/', [CategoryController::class, 'index'])->name('index');
                 Route::get('/create', [CategoryController::class, 'create'])->name('create');
@@ -47,8 +50,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::prefix('order/')->name('order.')->group(function () {
                 Route::get('/', [OrderController::class, 'index'])->name('index');
                 Route::get('/detail/{id}', [OrderController::class, 'show'])->name('show');
+                Route::post('get-order', [OrderController::class, 'get_order'])->name('get-order');
+                Route::post('change-status', [OrderController::class, 'change_status_order'])->name('change-status');
             });
         });
 });
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -9,9 +9,10 @@ class Order extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 
+        'name',
         'address',
         'total',
+        'status',
         'phone'
     ];
     public function detail_order()

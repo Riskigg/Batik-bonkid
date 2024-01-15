@@ -9,10 +9,11 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 
+        'name',
         'image',
         'deskripsi',
         'price',
+        'qty',
         'category_id'
     ];
 
@@ -24,5 +25,5 @@ class Product extends Model
     {
         return $this->hasOne(Detail_order::class);
     }
-    
+
 }

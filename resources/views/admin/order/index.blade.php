@@ -17,7 +17,7 @@
   <script src="{{ asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
   <script src="{{ asset('assets/js/data-table.js') }}"></script>
 @endsection
- 
+
 @section('content')
 <div class="page-content">
     <div class="row">
@@ -46,6 +46,7 @@
                         <th>Address</th>
                         <th>Phone</th>
                         <th class="text-right">Total</th>
+                        <th>Status</th>
                         <th class="text-right">Action</th>
                     </tr>
                     </thead>
@@ -57,13 +58,20 @@
                             <td>{{ $item->address }}</td>
                             <td>{{ $item->phone }}</td>
                             <td class="text-right">Rp. {{ number_format($item->total) }}</td>
+                            <td>
+                                @if ($item->status == 1)
+                                    <div class="badge badge-success">Sudah Konfirmasi</div>
+                                @else
+                                    <div class="badge badge-danger">Belum Konfirmasi</div>
+                                @endif
+                            </td>
                             <td class="text-right">
                                 <a class="btn btn-sm btn-success" href="{{ route('admin.order.show',$item->id) }}">Detail</a>
-                                
+                                <a class="btn btn-icon btn-primary btn-changeStatus" data-toggle="modal" data-target="#change-status" data-id="{{ $item->id }}"><i data-feather="edit"></i></a>
                             </td>
-                        </tr>    
+                        </tr>
                         @endforeach
-                    
+
                     </tbody>
                 </table>
                 </div>
@@ -72,6 +80,33 @@
         </div>
     </div>
 
+</div>
+@endsection
+
+@section('modal')
+  <!-- Modal -->
+  <div class="modal fade" id="change-status" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ubah Status Order</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <form action="{{ route('admin.order.change-status')}}" method="POST">
+            @csrf
+            <div class="modal-body">
+                <input class="order" type="hidden" name="id" value="">
+                Apakah Anda yakin ingin mengubah status Order ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                <button type="submit" class="btn btn-primary">Ya</button>
+            </div>
+        </form>
+    </div>
+    </div>
 </div>
 @endsection
 
